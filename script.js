@@ -41,7 +41,6 @@ function render(list) {
     }
 
     node.querySelector('.cover-title').textContent = book.title;
-    node.querySelector('.stamp-count').textContent = formatCount(book.downloads || 0);
     node.querySelector('.title').textContent = book.title;
     node.querySelector('.author').textContent = book.author || '';
     grid.appendChild(node);
