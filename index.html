@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전자책 서가</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">서가</span>
+      <span class="brand-name">전자책 서가</span>
+    </a>
+    <div class="search-wrap">
+      <input id="searchInput" type="text" placeholder="제목으로 검색" autocomplete="off">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="toolbar">
+    <p id="resultCount" class="result-count"></p>
+    <div class="sort-group" role="tablist" aria-label="정렬 기준">
+      <button class="sort-btn is-active" data-sort="downloads">인기순</button>
+      <button class="sort-btn" data-sort="date">최신순</button>
+      <button class="sort-btn" data-sort="title">제목순</button>
+    </div>
+  </div>
+
+  <section id="grid" class="grid" aria-live="polite"></section>
+
+  <p id="emptyState" class="empty-state" hidden>검색 결과가 없어요. 다른 키워드로 찾아보세요.</p>
+</main>
+
+<template id="cardTemplate">
+  <a class="card" href="#">
+    <div class="cover">
+      <span class="cover-title"></span>
+      <span class="stamp" aria-hidden="true">
+        <span class="stamp-count"></span>
+        <span class="stamp-label">DL</span>
+      </span>
+    </div>
+    <div class="meta">
+      <h3 class="title"></h3>
+      <p class="author"></p>
+    </div>
+  </a>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

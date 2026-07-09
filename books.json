@@ -1,0 +1,56 @@
+[
+  {
+    "id": "book01",
+    "title": "청년을 위한 취업 로드맵",
+    "author": "대학일자리플러스센터",
+    "file": "books/sample1.pdf",
+    "cover": "",
+    "date": "2026-06-01",
+    "downloads": 482
+  },
+  {
+    "id": "book02",
+    "title": "이력서와 자기소개서 완전정복",
+    "author": "커리어 컨설팅팀",
+    "file": "books/sample2.pdf",
+    "cover": "",
+    "date": "2026-05-20",
+    "downloads": 915
+  },
+  {
+    "id": "book03",
+    "title": "면접, 이렇게 준비하라",
+    "author": "커리어 컨설팅팀",
+    "file": "books/sample3.pdf",
+    "cover": "",
+    "date": "2026-04-15",
+    "downloads": 1203
+  },
+  {
+    "id": "book04",
+    "title": "국민취업지원제도 안내서",
+    "author": "고용노동부",
+    "file": "books/sample4.pdf",
+    "cover": "",
+    "date": "2026-03-10",
+    "downloads": 356
+  },
+  {
+    "id": "book05",
+    "title": "청년 농업 창업 가이드",
+    "author": "청년FARM",
+    "file": "books/sample5.pdf",
+    "cover": "",
+    "date": "2026-02-22",
+    "downloads": 678
+  },
+  {
+    "id": "book06",
+    "title": "직무 역량 자가진단 워크북",
+    "author": "커리어 컨설팅팀",
+    "file": "books/sample6.pdf",
+    "cover": "",
+    "date": "2026-01-30",
+    "downloads": 142
+  }
+]
