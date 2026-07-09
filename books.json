@@ -3,7 +3,7 @@
     "id": "book01",
     "title": "외운 티 나는 자기소개는 탈락합니다",
     "author": "1분, 나답게 말하는 법",
-    "file": "books/외운티나는자기소개는탈락합니다.pdf",
+    "file": "books/book01.pdf",
     "cover": "covers/book01.jpg",
     "date": "2026-07-09",
     "downloads": 0
@@ -12,7 +12,7 @@
     "id": "book02",
     "title": "면접 생존 매뉴얼",
     "author": "동명대생을 위한 면접 현실 밀착 가이드",
-    "file": "books/면접생존매뉴얼.pdf",
+    "file": "books/book02.pdf",
     "cover": "covers/book02.jpg",
     "date": "2026-07-09",
     "downloads": 0
