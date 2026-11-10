@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#2ea6e0">
-<title>도전! 골든벨</title>
+<title>도전! 동명 골든벨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Black+Han+Sans&display=swap" rel="stylesheet">
@@ -374,6 +374,32 @@ body{background:#0e5a9c}
 .lobby .unilogo.lg{height:58px;border:0;box-shadow:none;padding:0 0 4px}
 .logoplate{background:#fff;border:4px solid #8ea4bb;border-radius:16px;box-shadow:0 0 0 3px #5e7792,0 5px 0 3px #4b6380;padding:10px;display:grid;place-items:center}
 .logoplate img{height:46px;width:auto}
+
+/* 대기실: 제목·QR 가운데 정렬 */
+.phase-lobby .brand{display:none}
+.phase-lobby .hbar{position:absolute;top:0;right:0;z-index:5}
+.phase-lobby .main{padding-top:18px}
+.phase-lobby #boardsWrap{margin-top:84px}
+.lobbycol{flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;min-height:0}
+.lobbycol .lobby{width:100%;flex:1;min-height:0;padding:20px 24px;gap:10px}
+.lbrand{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.lbrand .hlogo{height:50px}
+.lbrand h1{font-family:'Jua';font-size:46px;line-height:1.05;color:#fff36b;-webkit-text-stroke:3px #0b3d75;paint-order:stroke fill;text-shadow:0 4px 0 #0b3d75;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.lbrand h1 .bell{font-size:40px;-webkit-text-stroke:0;text-shadow:none;filter:drop-shadow(0 3px 4px rgba(11,61,117,.35));animation:swing 3s ease-in-out infinite;transform-origin:50% 10%}
+.lbrand p{color:#e6f7ff;font-family:'Jua';font-size:16px;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.lbrand h1 .bell.r{animation-delay:-1.5s}
+.lobbycol .qrbox{width:auto;height:min(290px,34vh);aspect-ratio:1;flex:none}
+.lobbycol .lobby{justify-content:center;gap:clamp(4px,1.2vh,10px);padding:clamp(12px,2vh,20px) 24px}
+.lobbycol .lobby h2{font-size:clamp(20px,3.3vh,28px)}
+.lobbycol .roomcode{font-size:clamp(32px,5.8vh,50px)}
+.lobbycol .roomcode small{font-size:13px}
+.lobbycol .lobby .count{font-size:clamp(16px,2.6vh,22px)}
+.lobbycol .lobby .warn{font-size:12px;padding:6px 10px}
+.lbrand{gap:clamp(2px,.6vh,6px)}
+.lbrand .hlogo{height:clamp(34px,5.6vh,50px)}
+.lbrand h1{font-size:clamp(30px,5.2vh,46px)}
+.lbrand h1 .bell{font-size:clamp(26px,4.4vh,40px)}
+.lbrand p{font-size:clamp(13px,1.8vh,16px)}
 </style>
 </head>
 <body>
@@ -492,7 +518,7 @@ const params = new URLSearchParams(location.search);
 const HKEY = 'gb-host-v1';
 const H = { cfg:null, data:{}, tiles:new Map(), lastPhaseKey:'', timerInt:null, lastTick:-1, modalOpen:false, prevPhase:null };
 
-function hostDefaults(){ return { title:'도전! 골든벨', subtitle:'동명대학교 진로취업지원센터', mode:'elim', autoLock:true, sound:true, dbUrl:'', baseUrl:'', questions:clone(SAMPLE), room:null }; }
+function hostDefaults(){ return { title:'도전! 동명 골든벨', subtitle:'동명대학교 진로취업지원센터', mode:'elim', autoLock:true, sound:true, dbUrl:'', baseUrl:'', questions:clone(SAMPLE), room:null }; }
 function saveCfg(){ localStorage.setItem(HKEY, JSON.stringify(H.cfg)); }
 function roomPath(p=''){ return `rooms/${H.cfg.room}${p ? '/'+p : ''}`; }
 function dbUrlHost(){ return normDbUrl(FIXED_DB_URL || H.cfg.dbUrl); }
@@ -500,6 +526,7 @@ function dbUrlHost(){ return normDbUrl(FIXED_DB_URL || H.cfg.dbUrl); }
 async function startHost(){
   try { H.cfg = Object.assign(hostDefaults(), JSON.parse(localStorage.getItem(HKEY) || '{}')); } catch(e){ H.cfg = hostDefaults(); }
   if (!H.cfg.questionsEdited) H.cfg.questions = clone(SAMPLE);
+  if (!H.cfg.title || H.cfg.title === '도전! 골든벨') H.cfg.title = '도전! 동명 골든벨';
   Snd.on = H.cfg.sound;
   buildHostDom();
   try { await initStore(dbUrlHost()); }
@@ -642,13 +669,19 @@ function renderHost(){
 function renderStage(st){
   const stage = $('#stage');
   const ph = st.phase;
-  const k = `${ph}|${st.q}|${H.cfg.room}|${ph==='lobby'?Store.mode+joinUrl():''}`;
+  const k = `${ph}|${st.q}|${H.cfg.room}|${ph==='lobby'?Store.mode+joinUrl()+H.cfg.title+H.cfg.subtitle:''}`;
   if (ph === 'lobby') {
     if (H.lastPhaseKey !== k) {
       H.lastPhaseKey = k;
       const url = joinUrl();
       const fileWarn = location.protocol==='file:' && !H.cfg.baseUrl;
-      stage.innerHTML = `<div class="lobby">
+      stage.innerHTML = `<div class="lobbycol">
+        <div class="lbrand">
+          <img class="hlogo" src="${LOGO_W}" alt="동명대학교">
+          <h1><span class="bell">🔔</span>${esc(H.cfg.title)}<span class="bell r">🔔</span></h1>
+          ${H.cfg.subtitle ? `<p>${esc(H.cfg.subtitle)}</p>` : ''}
+        </div>
+        <div class="lobby">
         <h2>📱 QR 찍고 참여하세요!</h2>
         <div class="qrbox" id="qr"><div class="noqr">QR 생성 중…</div></div>
         <div class="roomcode"><small>방 번호</small>${esc(H.cfg.room)}</div>
@@ -656,7 +689,7 @@ function renderStage(st){
         ${Store.mode==='local' ? `<div class="warn">데모 모드예요. 학생 휴대폰으로 접속하려면 ⚙️ 설정에서 Firebase를 연결해 주세요. 지금은 아래 ‘학생 화면 열기’로 같은 브라우저에서 테스트할 수 있어요.</div>` : ''}
         ${fileWarn && Store.mode!=='local' ? `<div class="warn">PC에 저장된 파일로 열려 있어요. 학생들이 접속하려면 ⚙️ 설정의 ‘학생 접속 주소’에 GitHub Pages 주소를 넣어 주세요.</div>` : ''}
         <div class="count" id="lobbyCount"></div>
-      </div>`;
+      </div></div>`;
       drawQR(url);
     }
     $('#lobbyCount').textContent = `현재 ${playersList().length}명 참여`;
@@ -1094,7 +1127,7 @@ function openSettings(){
   $('#sNew', m.bg).onclick = () => { m.close(); newGame(); };
   $('#sOk', m.bg).onclick = () => {
     const prevDb = c.dbUrl;
-    c.title = $('#sTitle', m.bg).value.trim() || '도전! 골든벨';
+    c.title = $('#sTitle', m.bg).value.trim() || '도전! 동명 골든벨';
     c.subtitle = $('#sSub', m.bg).value.trim();
     c.mode = mode; c.autoLock = $('#sAuto', m.bg).checked;
     if ($('#sDb', m.bg)) c.dbUrl = normDbUrl($('#sDb', m.bg).value);
@@ -1144,7 +1177,7 @@ function subQ(){
 
 function pTop(){
   const me = P.me;
-  return `<div class="ptop"><span class="t">${esc(P.meta?.title || '도전! 골든벨')}</span>${me ? `<span class="me"><span class="e">${esc(me.char)}</span>${esc(me.name)}</span>` : ''}</div>`;
+  return `<div class="ptop"><span class="t">${esc(P.meta?.title || '도전! 동명 골든벨')}</span>${me ? `<span class="me"><span class="e">${esc(me.char)}</span>${esc(me.name)}</span>` : ''}</div>`;
 }
 
 function renderPlayer(){
