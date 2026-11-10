@@ -400,6 +400,12 @@ body{background:#0e5a9c}
 .lbrand h1{font-size:clamp(30px,5.2vh,46px)}
 .lbrand h1 .bell{font-size:clamp(26px,4.4vh,40px)}
 .lbrand p{font-size:clamp(13px,1.8vh,16px)}
+
+/* 문제 세트 선택 */
+.setsel{display:flex;align-items:center;gap:4px;background:linear-gradient(180deg,#e9f2fa,#b9cbdc);border:3px solid #6d86a0;border-radius:16px;padding:4px;box-shadow:inset 0 2px 0 #fff,0 4px 0 #4b6380}
+.setsel span{font-family:'Jua';color:#3e5873;font-size:14px;padding:0 6px 0 8px}
+.setsel button{height:36px;padding:0 14px;border-radius:11px;background:transparent;color:#0b3d75;font-family:'Jua';font-size:16px}
+.setsel button.on{background:linear-gradient(180deg,#ffb347,#f76b1c);color:#fff;box-shadow:0 3px 0 #a3410b;text-shadow:0 1px 0 #a3410b}
 </style>
 </head>
 <body>
@@ -433,6 +439,20 @@ const SAMPLE = [
   {type:'mc', text:'다음 중 삼성그룹의 직무적성검사 이름은?', options:['SKCT','GSAT','HMAT','LG Way Fit Test'], answer:1, time:20},
   {type:'mc', text:'동명대 대학본관(1호관) 앞에 있는 책탑의 책은 총 몇 권일까요?', options:['24권','36권','42권','50권'], answer:2, time:20},
 ];
+const SET2 = [
+  {type:'short', text:'기업의 의뢰를 받아 알맞은 인재를 찾아 연결해 주는 전문가는? (○○○○)', answer:'헤드헌터', accept:'', time:25},
+  {type:'mc', text:'경력과 이력을 공유하고 구인·구직에도 쓰는 대표적인 비즈니스 SNS는?', options:['링크드인','핀터레스트','스레드','디스코드'], answer:0, time:20},
+  {type:'short', text:'기업이 지원자의 성격과 직무 적성을 함께 평가하는 시험은? (○○○검사)', answer:'인적성', accept:'인적성검사', time:25},
+  {type:'short', text:'여러 기업이 한곳에 모여 채용 상담과 현장 면접을 진행하는 행사는? (채용○○○)', answer:'박람회', accept:'채용박람회, 잡페어', time:25},
+  {type:'mc', text:'NCS에서 직무 수행에 필요하다고 보는 3가지 요소가 아닌 것은?', options:['지식','기술','태도','학력'], answer:3, time:20},
+  {type:'mc', revival:true, text:'근로 기간을 정하지 않고 고용되는 형태는?', options:['계약직','정규직','파견직','프리랜서'], answer:1, time:20},
+  {type:'short', text:'정식 채용 전에 회사에 적응하며 업무 능력을 평가받는 기간은? (○○기간)', answer:'수습', accept:'수습기간', time:25},
+  {type:'mc', text:'웹캠으로 진행하며 AI가 답변 내용과 표정, 음성 등을 분석하는 평가는?', options:['AI 역량검사','토익스피킹','인바스켓','그룹토론'], answer:0, time:20},
+  {type:'short', text:'최종 합격 전, 지원자의 이전 직장 동료나 상사에게 평판을 확인하는 절차는? (레퍼런스 ○○)', answer:'체크', accept:'레퍼런스체크, 레퍼런스 체크, 평판조회', time:30},
+  {type:'mc', text:'공공기관 채용에 쓰이는 NCS 직업기초능력은 모두 몇 개 영역일까요?', options:['5개','8개','10개','12개'], answer:2, time:25},
+  {type:'short', text:'동명대 진로취업지원센터의 전문 취업컨설턴트는 모두 몇 명일까요? (숫자로)', answer:'15', accept:'15명, 십오명, 열다섯명, 열다섯', time:25},
+];
+const SETS = { 1:{ name:'1세트', qs:SAMPLE }, 2:{ name:'2세트 · 취업', qs:SET2 } };
 
 /* ---------------- utils ---------------- */
 const $ = (s, r=document) => r.querySelector(s);
@@ -526,7 +546,8 @@ function dbUrlHost(){ return normDbUrl(FIXED_DB_URL || H.cfg.dbUrl); }
 
 async function startHost(){
   try { H.cfg = Object.assign(hostDefaults(), JSON.parse(localStorage.getItem(HKEY) || '{}')); } catch(e){ H.cfg = hostDefaults(); }
-  if (!H.cfg.questionsEdited) H.cfg.questions = clone(SAMPLE);
+  if (!SETS[H.cfg.setNo]) H.cfg.setNo = 1;
+  if (!H.cfg.questionsEdited) H.cfg.questions = clone(SETS[H.cfg.setNo].qs);
   if (!H.cfg.title || H.cfg.title === '도전! 골든벨') H.cfg.title = '도전! 동명 골든벨';
   Snd.on = H.cfg.sound;
   buildHostDom();
@@ -583,6 +604,7 @@ function buildHostDom(){
     <button class="btn" id="bPlus">⏱ +10초</button>
     <button class="btn" id="bSkip">⏭ 문제 건너뛰기</button>
     <button class="btn" id="bEnd">🏁 결과 보기</button>
+    <div class="setsel" id="setSel"><span>문제</span><button data-set="1">1세트</button><button data-set="2">2세트 · 취업</button></div>
     <button class="btn" id="bDemo">📱 학생 화면 열기(테스트)</button>
     <span class="hint">스페이스바 · → · 리모컨으로도 진행</span>
     <button class="btn primary" id="bMain">▶</button>
@@ -598,6 +620,16 @@ function buildHostDom(){
   $('#bEnd').onclick = () => { if (confirm('게임을 끝내고 최종 결과를 보여줄까요?')) Store.update(roomPath('state'), { phase:'end' }); };
   $('#bRevive').onclick = reviveAll;
   $('#bDemo').onclick = () => window.open(joinUrl(), '_blank');
+  document.querySelectorAll('#setSel button').forEach(b => b.onclick = () => chooseSet(Number(b.dataset.set)));
+}
+function chooseSet(n, force){
+  if (!SETS[n]) return false;
+  if (!force && H.cfg.setNo === n && !H.cfg.questionsEdited) return true;
+  if (H.cfg.questionsEdited && !confirm(`직접 고친 문제가 있어요. ${SETS[n].name} 기본 문제로 바꿀까요? (고친 내용은 사라져요)`)) return false;
+  H.cfg.setNo = n; H.cfg.questions.length = 0; H.cfg.questions.push(...clone(SETS[n].qs)); H.cfg.questionsEdited = false; saveCfg();
+  if ((H.data.state||{}).phase === 'lobby') Store.update(roomPath('state'), { total:H.cfg.questions.length });
+  toast(`📚 ${SETS[n].name}(${H.cfg.questions.length}문제)로 바꿨어요`);
+  renderHost(); return true;
 }
 function toggleFs(){ if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
 
@@ -693,7 +725,7 @@ function renderStage(st){
       </div></div>`;
       drawQR(url);
     }
-    $('#lobbyCount').textContent = `현재 ${playersList().length}명 참여`;
+    $('#lobbyCount').textContent = `현재 ${playersList().length}명 참여 · ${H.cfg.questionsEdited ? '직접 편집한 문제' : SETS[H.cfg.setNo].name} ${H.cfg.questions.length}문제`;
     return;
   }
   if (ph === 'end') { stage.innerHTML=''; H.lastPhaseKey=k; return; }
@@ -868,6 +900,8 @@ function renderCtrl(st){
   $('#bSkip').classList.toggle('hidden', !['question','locked','revealed'].includes(ph));
   $('#bEnd').classList.toggle('hidden', ph==='lobby' || ph==='end');
   $('#bDemo').classList.toggle('hidden', Store.mode!=='local');
+  $('#setSel').classList.toggle('hidden', ph!=='lobby');
+  document.querySelectorAll('#setSel button').forEach(b => b.classList.toggle('on', !H.cfg.questionsEdited && Number(b.dataset.set) === H.cfg.setNo));
 }
 
 /* ---------- game flow ---------- */
@@ -1007,7 +1041,7 @@ function openEditor(){
     <button class="mbtn" id="tsvBtn">📋 엑셀에서 붙여넣기</button>
     <button class="mbtn" id="expBtn">⬇ 내보내기</button>
     <button class="mbtn" id="impBtn">⬆ 불러오기</button>
-    <button class="mbtn" id="smpBtn">기본 문제로 되돌리기</button>
+    <button class="mbtn" id="set1Btn">1세트 불러오기</button><button class="mbtn" id="set2Btn">2세트 불러오기</button>
     <button class="mbtn red" id="clrBtn">전체 삭제</button>
     <button class="mbtn blue" id="okBtn">완료</button>`);
   const list = $('#qlist', m.bg);
@@ -1059,7 +1093,8 @@ function openEditor(){
   $('#addS', m.bg).onclick = () => add('short');
   $('#addM', m.bg).onclick = () => add('mc');
   $('#okBtn', m.bg).onclick = m.close;
-  $('#smpBtn', m.bg).onclick = () => { if (confirm(`지금 문제를 지우고 기본 문제 ${SAMPLE.length}개로 되돌릴까요?`)) { Q.length = 0; Q.push(...clone(SAMPLE)); commit(); H.cfg.questionsEdited = false; saveCfg(); draw(); } };
+  $('#set1Btn', m.bg).onclick = () => { if (chooseSet(1, true)) draw(); };
+  $('#set2Btn', m.bg).onclick = () => { if (chooseSet(2, true)) draw(); };
   $('#clrBtn', m.bg).onclick = () => { if (confirm('모든 문제를 삭제할까요?')) { Q.length = 0; commit(); draw(); } };
   $('#expBtn', m.bg).onclick = () => {
     const blob = new Blob([JSON.stringify(Q, null, 2)], {type:'application/json'});
