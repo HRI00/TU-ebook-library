@@ -428,8 +428,8 @@ const CIRC = ['①','②','③','④'];
 
 const SAMPLE = [
   {type:'mc', text:'청년 구직자에게 취업지원 서비스와 함께 구직촉진수당을 지급하는 고용노동부 제도는?', options:['국민내일배움카드','국민취업지원제도','청년도약계좌','근로장려금'], answer:1, time:20},
-  {type:'short', text:'면접 답변을 상황(S)–과제(T)–행동(A)–결과(R) 순서로 말하는 기법은? (영어 4글자)', answer:'STAR', accept:'스타, STAR기법, 스타기법', time:30},
-  {type:'short', text:'공공기관 채용에서 직무능력 평가 기준으로 쓰는 ‘국가직무능력표준’의 영문 약자는?', answer:'NCS', accept:'국가직무능력표준', time:30},
+  {type:'mc', text:'면접 답변을 상황(S)–과제(T)–행동(A)–결과(R) 순서로 말하는 기법은?', options:['SWOT 분석','PDCA','SMART','STAR 기법'], answer:3, time:20},
+  {type:'mc', text:'공공기관 채용에서 직무능력 평가 기준으로 쓰는 ‘국가직무능력표준’의 영문 약자는?', options:['KPI','GSAT','NCS','OPIc'], answer:2, time:20},
   {type:'mc', text:'다음 중 블라인드 채용 입사지원서에서 요구하지 않는 항목은?', options:['직무 관련 경험','보유 자격증','출신 학교','직무교육 이수 내역'], answer:2, time:20},
   {type:'mc', text:'재맞고(재학생 맞춤형 고용서비스)에는 ‘진로 탐색’ 과정과 ‘취업 준비’ 과정이 있어요. 두 과정의 이름은?', options:['빌드업 · 점프업','워밍업 · 스타트업','레벨업 · 파워업','셋업 · 백업'], answer:0, time:20},
   {type:'short', revival:true, text:'우리 센터의 또 다른 이름! ‘대학○○○플러스센터’의 ○○○은?', answer:'일자리', accept:'대학일자리플러스센터, 일자리플러스', time:25},
@@ -440,10 +440,10 @@ const SAMPLE = [
   {type:'mc', text:'동명대 대학본관(1호관) 앞에 있는 책탑의 책은 총 몇 권일까요?', options:['24권','36권','42권','50권'], answer:2, time:20},
 ];
 const SET2 = [
-  {type:'short', text:'기업의 의뢰를 받아 알맞은 인재를 찾아 연결해 주는 전문가는? (○○○○)', answer:'헤드헌터', accept:'', time:25},
+  {type:'mc', text:'기업의 의뢰를 받아 알맞은 인재를 찾아 연결해 주는 전문가는?', options:['인플루언서','헤드헌터','큐레이터','바리스타'], answer:1, time:20},
   {type:'mc', text:'경력과 이력을 공유하고 구인·구직에도 쓰는 대표적인 비즈니스 SNS는?', options:['링크드인','핀터레스트','스레드','디스코드'], answer:0, time:20},
-  {type:'short', text:'기업이 지원자의 성격과 직무 적성을 함께 평가하는 시험은? (○○○검사)', answer:'인적성', accept:'인적성검사', time:25},
-  {type:'short', text:'여러 기업이 한곳에 모여 채용 상담과 현장 면접을 진행하는 행사는? (채용○○○)', answer:'박람회', accept:'채용박람회, 잡페어', time:25},
+  {type:'mc', text:'기업이 지원자의 성격과 직무 적성을 함께 평가하는 시험은?', options:['토익(TOEIC)','한국사능력검정시험','컴퓨터활용능력','인적성검사'], answer:3, time:20},
+  {type:'mc', text:'여러 기업이 한곳에 모여 채용 상담과 현장 면접을 진행하는 행사는?', options:['기업설명회','인턴십','채용박람회','해커톤'], answer:2, time:20},
   {type:'mc', text:'NCS에서 직무 수행에 필요하다고 보는 3가지 요소가 아닌 것은?', options:['지식','기술','태도','학력'], answer:3, time:20},
   {type:'mc', revival:true, text:'근로 기간을 정하지 않고 고용되는 형태는?', options:['계약직','정규직','파견직','프리랜서'], answer:1, time:20},
   {type:'short', text:'정식 채용 전에 회사에 적응하며 업무 능력을 평가받는 기간은? (○○기간)', answer:'수습', accept:'수습기간', time:25},
