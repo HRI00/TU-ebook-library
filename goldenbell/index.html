@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#f4f6fb">
+<meta name="theme-color" content="#2ea6e0">
 <title>도전! 골든벨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -250,6 +250,117 @@ body.pl{overflow:auto}
 @keyframes hop{0%,100%{transform:translateY(0)}40%{transform:translateY(-14px)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+/* ===== 바닷속 퀴즈 기지 테마 ===== */
+/* D. 바닷속 퀴즈 기지 */
+body{background:#0e5a9c}
+.host{background:
+  radial-gradient(circle at 6% 70%,rgba(255,255,255,.55) 0 6px,transparent 7px),
+  radial-gradient(circle at 8% 60%,rgba(255,255,255,.45) 0 4px,transparent 5px),
+  radial-gradient(circle at 5% 52%,rgba(255,255,255,.4) 0 9px,transparent 10px),
+  radial-gradient(circle at 95% 75%,rgba(255,255,255,.5) 0 7px,transparent 8px),
+  radial-gradient(circle at 93% 64%,rgba(255,255,255,.4) 0 4px,transparent 5px),
+  radial-gradient(circle at 96% 55%,rgba(255,255,255,.35) 0 10px,transparent 11px),
+  radial-gradient(1200px 300px at 50% 0%,rgba(255,255,255,.35),transparent 70%),
+  radial-gradient(900px 200px at 50% 105%,#f5d58c 0 40%,transparent 41%),
+  linear-gradient(180deg,#6fd8f5 0%,#2ea6e0 35%,#1673be 75%,#0e5a9c 100%)}
+.host::after{content:"";position:fixed;left:0;right:0;bottom:0;height:120px;pointer-events:none;z-index:0;
+  background:
+   radial-gradient(18px 80px at 3% 100%,#2fbf71 98%,transparent),radial-gradient(14px 60px at 5% 100%,#22a35e 98%,transparent),
+   radial-gradient(16px 90px at 97% 100%,#2fbf71 98%,transparent),radial-gradient(12px 64px at 95% 100%,#22a35e 98%,transparent),
+   radial-gradient(14px 50px at 30% 100%,#22a35e 98%,transparent),radial-gradient(14px 56px at 72% 100%,#2fbf71 98%,transparent)}
+.brand h1{font-family:'Jua';font-size:44px;color:#fff36b;-webkit-text-stroke:3px #0b3d75;paint-order:stroke fill;text-shadow:0 4px 0 #0b3d75}
+.brand p{color:#e6f7ff;font-family:'Jua';font-size:15px;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.stat{background:linear-gradient(180deg,#e9f2fa,#b9cbdc);border:3px solid #6d86a0;border-radius:14px;box-shadow:inset 0 2px 0 #fff,0 4px 0 #4b6380}
+.stat b{font-family:'Jua';color:#0b3d75}.stat.alive b{color:#e8590c}
+.stat span{color:#3e5873;font-weight:800}
+.tbtn,.conn{background:linear-gradient(180deg,#e9f2fa,#b9cbdc);border:3px solid #6d86a0;box-shadow:0 3px 0 #4b6380;color:#0b3d75}
+.btn{background:linear-gradient(180deg,#e9f2fa,#b9cbdc);border:3px solid #6d86a0;box-shadow:inset 0 2px 0 #fff,0 4px 0 #4b6380;color:#0b3d75;font-family:'Jua';font-size:16px}
+.ctrl .hint{color:#e6f7ff}
+/* 모니터 */
+.qcard,.lobby{background:#fbfdff;border:7px solid #8ea4bb;border-radius:22px;box-shadow:inset 0 0 0 3px #d7e2ee,0 0 0 4px #5e7792,0 10px 0 #4b6380,0 18px 30px rgba(0,30,70,.35)}
+.qcard::before,.qcard::after{content:'';position:absolute;top:8px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#8ea4bb 60%,#5e7792);box-shadow:0 calc(100% + 0px) 0 transparent}
+.qcard::before{left:10px}.qcard::after{right:10px}
+.qnum{background:radial-gradient(circle at 35% 30%,#7fd3ff,#1f78d1 70%);border:4px solid #0b3d75;color:#fff;font-family:'Jua';box-shadow:0 4px 0 #0b3d75;text-shadow:0 2px 0 #0b3d75}
+.qnum small{color:#d8f0ff}
+.qtext{color:#0b2a52}
+.opt{background:#eef5fc;border:3px solid #b9cbdc;border-radius:16px;color:#0b2a52}
+.opt b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7fd3ff,#1f78d1 70%);border:3px solid #0b3d75;color:#fff;font-family:'Jua';font-size:20px;flex:none}
+.opt b{font-size:0}.opt b::after{font-size:20px}
+.opt:nth-child(1) b::after{content:'1'}.opt:nth-child(2) b::after{content:'2'}.opt:nth-child(3) b::after{content:'3'}.opt:nth-child(4) b::after{content:'4'}
+.opt.right{background:#dcfce7;border-color:#22c55e}
+.answer-banner{background:linear-gradient(180deg,#ffb347,#f76b1c);border:3px solid #a3410b;box-shadow:0 4px 0 #a3410b;border-radius:16px}
+.timer .bg{stroke:#d7e2ee}.timer .fg{stroke:#f76b1c}.timer .tnum,.timer .tlabel{color:#0b3d75;font-family:'Jua'}
+/* 캡슐 */
+.tile::after{content:'';position:absolute;top:calc(var(--w)*-.10);left:50%;transform:translateX(-50%);width:calc(var(--w)*.80);height:calc(var(--w)*.66);border-radius:50% 50% 30% 30%;
+  background:radial-gradient(ellipse at 28% 22%,rgba(255,255,255,.95) 0 7%,transparent 9%),radial-gradient(ellipse at 40% 15%,rgba(255,255,255,.6) 0 3%,transparent 4%),linear-gradient(180deg,rgba(255,255,255,.35),rgba(170,225,255,.18));
+  border:calc(var(--w)*.025) solid rgba(255,255,255,.85);box-shadow:inset 0 -6px 12px rgba(120,200,255,.35);z-index:1;pointer-events:none}
+.tile .char{z-index:1}
+.tile{padding-top:calc(var(--w)*.12)}
+.tile::after{top:calc(var(--w)*.02)}
+.face{border-radius:calc(var(--w)*.06);box-shadow:0 5px 0 #4b6380}
+.face.back{background:linear-gradient(180deg,#e9f2fa,#b9cbdc);border:calc(var(--w)*.035) solid #6d86a0;color:#4b6380}
+.tile.submitted .face.back{background:linear-gradient(180deg,#ffe08a,#ffb020);color:#7a4300;border-color:#a3410b}
+.tile.lobbyt .face.back{background:linear-gradient(180deg,#f3f8fd,#d4e1ee);border-color:#6d86a0}
+.face.front{border:calc(var(--w)*.035) solid #6d86a0}
+.face.front .ans{color:#0b2a52}
+.tile .hand{background:linear-gradient(180deg,#e9f2fa,#8ea4bb);border-color:#5e7792}
+.tile .name{font-family:'Jua';color:#0b2a52;background:linear-gradient(180deg,#fdfefe,#c9d8e6);border:2.5px solid #5e7792;border-radius:8px;padding:1px 12px;box-shadow:0 3px 0 #4b6380}
+.tile .name::before{content:'🫧 ';font-size:.8em}
+.btn.primary{background:linear-gradient(180deg,#ffb347,#f76b1c);color:#fff;border:3px solid #a3410b;box-shadow:inset 0 2px 0 #ffd8a8,0 6px 0 #a3410b,0 12px 20px rgba(0,30,70,.3);font-family:'Jua';font-size:23px;text-shadow:0 2px 0 #a3410b}
+.qrbox{border:5px solid #6d86a0}
+.roomcode{font-family:'Jua';color:#0b3d75}
+.lobby h2{color:#0b3d75}
+.empty-hint,#outStrip{color:#e6f7ff}
+/* player */
+.player{background:radial-gradient(circle at 90% 30%,rgba(255,255,255,.5) 0 6px,transparent 7px),radial-gradient(circle at 86% 22%,rgba(255,255,255,.4) 0 4px,transparent 5px),radial-gradient(circle at 92% 14%,rgba(255,255,255,.35) 0 9px,transparent 10px),linear-gradient(180deg,#6fd8f5,#2ea6e0 45%,#1673be)}
+.ptop .t{font-family:'Jua';color:#fff36b;-webkit-text-stroke:2.5px #0b3d75;paint-order:stroke fill;font-size:26px;text-shadow:0 3px 0 #0b3d75}
+.ptop .me{background:linear-gradient(180deg,#fdfefe,#c9d8e6);border:2.5px solid #5e7792;color:#0b2a52}
+.pcard{background:#fbfdff;border:5px solid #8ea4bb;border-radius:18px;box-shadow:0 0 0 3px #5e7792,0 6px 0 #4b6380}
+.pqhead .n{color:#1f78d1;font-family:'Jua'}
+.ptimer{background:linear-gradient(180deg,#ffb347,#f76b1c);color:#fff;font-family:'Jua'}
+.pbar{background:#d7e2ee}.pbar i{background:linear-gradient(90deg,#7fd3ff,#1f78d1)}
+.pq{color:#0b2a52}
+.mcbtn{background:linear-gradient(180deg,#fdfefe,#dfe9f3);border:3px solid #6d86a0;border-radius:18px;box-shadow:0 5px 0 #4b6380;color:#0b2a52}
+.mcbtn b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7fd3ff,#1f78d1 70%);border:3px solid #0b3d75;font-size:0}
+.mcbtn b::after{font-size:20px;color:#fff;font-family:'Jua'}
+.mcbtn:nth-child(1) b::after{content:'1'}.mcbtn:nth-child(2) b::after{content:'2'}.mcbtn:nth-child(3) b::after{content:'3'}.mcbtn:nth-child(4) b::after{content:'4'}
+.mcbtn.on{background:linear-gradient(180deg,#fff3c4,#ffd36b);border-color:#a3410b;box-shadow:0 5px 0 #a3410b}
+.pstatus,.pstatus.ok{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.hbar,.main,.ctrl,#outStrip{position:relative;z-index:1}
+
+/* D 보완: 대기실·결과·패자부활·학생 화면 */
+.lobby .joinurl{color:#4b6380}
+.lobby .count{color:#0b3d75}
+.lobby .warn{background:#fff3c4;color:#7a4300}
+.revtag{background:linear-gradient(180deg,#b38cff,#7c3aed);border:3px solid #4c1d95;box-shadow:0 4px 0 #4c1d95}
+.qcard.revival{border-color:#b9a3e8;box-shadow:inset 0 0 0 3px #e6dcff,0 0 0 4px #6d4bb8,0 10px 0 #4c3a8a,0 18px 30px rgba(0,30,70,.35)}
+.qcard.revival .qnum{background:radial-gradient(circle at 35% 30%,#d4bfff,#7c3aed 70%);border-color:#4c1d95;box-shadow:0 4px 0 #4c1d95}
+#outStrip .oc{filter:grayscale(1) brightness(1.4);opacity:.7}
+.toast{background:#0b3d75;border:3px solid #7fd3ff}
+.endov{background:radial-gradient(circle at 50% 30%,#bff0ff,#2ea6e0 55%,#0e5a9c)}
+.endov h2{color:#fff36b;-webkit-text-stroke:4px #0b3d75;paint-order:stroke fill;text-shadow:0 6px 0 #0b3d75;font-family:'Jua'}
+.endov p{color:#fff;font-family:'Jua';text-shadow:0 2px 0 #0b3d75}
+.winner{background:linear-gradient(180deg,#fdfefe,#dfe9f3);border:3px solid #6d86a0;box-shadow:0 5px 0 #4b6380}
+.winner.top{background:linear-gradient(180deg,#fff3c4,#ffd36b);border-color:#a3410b;box-shadow:0 5px 0 #a3410b}
+.winner .n{color:#0b2a52}.winner .s{color:#3e5873}
+.endov .btn{position:relative}
+.pcenter h2{color:#fff;text-shadow:0 2px 0 #0b3d75,0 0 12px rgba(11,61,117,.4)}
+.pcenter p{color:#e6f7ff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.chip{background:linear-gradient(180deg,#fdfefe,#c9d8e6);border:2.5px solid #5e7792;color:#0b2a52;font-weight:800}
+.pcard h2{color:#1f78d1;font-family:'Jua'}
+.chargrid button{background:#eef5fc;border:3px solid #d7e2ee}
+.chargrid button.on{background:#fff3c4;border-color:#f76b1c}
+.pbtn{background:linear-gradient(180deg,#ffb347,#f76b1c);color:#fff;border:3px solid #a3410b;box-shadow:0 5px 0 #a3410b;font-family:'Jua';text-shadow:0 2px 0 #a3410b}
+.pin:focus{border-color:#1f78d1}
+.pboard{border-color:#6d86a0!important}
+.minib{border:6px solid #6d86a0;box-shadow:0 6px 0 #4b6380}
+.ok-bg{background:radial-gradient(circle at 50% 28%,#7ff0b0,#2ea6e0 60%,#1673be)}
+.no-bg{background:radial-gradient(circle at 50% 28%,#ff9fae,#2ea6e0 60%,#1673be)}
+.gold-bg{background:radial-gradient(circle at 50% 28%,#fff36b,#2ea6e0 60%,#1673be)}
+.rev-bg{background:radial-gradient(circle at 50% 28%,#d4bfff,#2ea6e0 60%,#1673be)}
+.revbadge{background:linear-gradient(180deg,#b38cff,#7c3aed);border:2.5px solid #4c1d95}
+.pcard.rev{border-color:#b9a3e8}
+
 </style>
 </head>
 <body>
@@ -673,7 +784,7 @@ function layoutBoards(){
   let best = { c:1, w:0 };
   for (let c=1; c<=n; c++){
     const r = Math.ceil(n/c);
-    const w = Math.min((W - gap*(c-1))/c, ((Hh - gap*(r-1))/r)/1.16);
+    const w = Math.min((W - gap*(c-1))/c, ((Hh - gap*(r-1))/r)/1.30);
     if (w > best.w) best = { c, w };
   }
   const w = Math.floor(Math.min(best.w, 210));
