@@ -425,12 +425,13 @@ const SAMPLE = [
   {type:'short', text:'면접 답변을 상황(S)–과제(T)–행동(A)–결과(R) 순서로 말하는 기법은? (영어 4글자)', answer:'STAR', accept:'스타, STAR기법, 스타기법', time:30},
   {type:'short', text:'공공기관 채용에서 직무능력 평가 기준으로 쓰는 ‘국가직무능력표준’의 영문 약자는?', answer:'NCS', accept:'국가직무능력표준', time:30},
   {type:'mc', text:'다음 중 블라인드 채용 입사지원서에서 요구하지 않는 항목은?', options:['직무 관련 경험','보유 자격증','출신 학교','직무교육 이수 내역'], answer:2, time:20},
-  {type:'short', text:'엘리베이터를 타는 짧은 시간처럼, 30초~1분 안에 나를 핵심만 소개하는 방법은? (○○○○○ 피치)', answer:'엘리베이터', accept:'엘리베이터피치, 엘리베이터 스피치, elevator, elevator pitch', time:30},
+  {type:'mc', text:'재맞고(재학생 맞춤형 고용서비스)에는 ‘진로 탐색’ 과정과 ‘취업 준비’ 과정이 있어요. 두 과정의 이름은?', options:['빌드업 · 점프업','워밍업 · 스타트업','레벨업 · 파워업','셋업 · 백업'], answer:0, time:20},
   {type:'short', revival:true, text:'우리 센터의 또 다른 이름! ‘대학○○○플러스센터’의 ○○○은?', answer:'일자리', accept:'대학일자리플러스센터, 일자리플러스', time:25},
   {type:'mc', text:'근로계약서는 언제 작성하고 받아야 할까요?', options:['첫 월급을 받는 날','근로계약을 맺을 때(일 시작 전)','수습기간이 끝난 뒤','1년 근무 후'], answer:1, time:20},
   {type:'short', text:'정기 공채 대신, 기업이 필요할 때마다 인력을 뽑는 채용 방식은? (○○채용)', answer:'수시', accept:'수시채용', time:25},
   {type:'mc', text:'2026년 최저임금(시급)은 얼마일까요?', options:['9,860원','10,030원','10,320원','10,500원'], answer:2, time:20},
   {type:'mc', text:'다음 중 삼성그룹의 직무적성검사 이름은?', options:['SKCT','GSAT','HMAT','LG Way Fit Test'], answer:1, time:20},
+  {type:'mc', text:'동명대 대학본관(1호관) 앞에 있는 책탑의 책은 총 몇 권일까요?', options:['24권','36권','42권','50권'], answer:2, time:20},
 ];
 
 /* ---------------- utils ---------------- */
@@ -1058,7 +1059,7 @@ function openEditor(){
   $('#addS', m.bg).onclick = () => add('short');
   $('#addM', m.bg).onclick = () => add('mc');
   $('#okBtn', m.bg).onclick = m.close;
-  $('#smpBtn', m.bg).onclick = () => { if (confirm('지금 문제를 지우고 기본 문제 10개로 되돌릴까요?')) { Q.length = 0; Q.push(...clone(SAMPLE)); commit(); H.cfg.questionsEdited = false; saveCfg(); draw(); } };
+  $('#smpBtn', m.bg).onclick = () => { if (confirm(`지금 문제를 지우고 기본 문제 ${SAMPLE.length}개로 되돌릴까요?`)) { Q.length = 0; Q.push(...clone(SAMPLE)); commit(); H.cfg.questionsEdited = false; saveCfg(); draw(); } };
   $('#clrBtn', m.bg).onclick = () => { if (confirm('모든 문제를 삭제할까요?')) { Q.length = 0; commit(); draw(); } };
   $('#expBtn', m.bg).onclick = () => {
     const blob = new Blob([JSON.stringify(Q, null, 2)], {type:'application/json'});
