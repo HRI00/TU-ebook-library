@@ -452,7 +452,7 @@ const SET2 = [
   {type:'mc', text:'공공기관 채용에 쓰이는 NCS 직업기초능력은 모두 몇 개 영역일까요?', options:['5개','8개','10개','12개'], answer:2, time:25},
   {type:'short', text:'동명대 진로취업지원센터의 전문 취업컨설턴트는 모두 몇 명일까요? (숫자로)', answer:'15', accept:'15명, 십오명, 열다섯명, 열다섯', time:25},
 ];
-const SETS = { 1:{ name:'1세트', qs:SAMPLE }, 2:{ name:'2세트 · 취업', qs:SET2 } };
+const SETS = { 1:{ name:'1세트', qs:SAMPLE }, 2:{ name:'2세트', qs:SET2 } };
 
 /* ---------------- utils ---------------- */
 const $ = (s, r=document) => r.querySelector(s);
@@ -604,7 +604,7 @@ function buildHostDom(){
     <button class="btn" id="bPlus">⏱ +10초</button>
     <button class="btn" id="bSkip">⏭ 문제 건너뛰기</button>
     <button class="btn" id="bEnd">🏁 결과 보기</button>
-    <div class="setsel" id="setSel"><span>문제</span><button data-set="1">1세트</button><button data-set="2">2세트 · 취업</button></div>
+    <div class="setsel" id="setSel"><span>문제</span><button data-set="1">1세트</button><button data-set="2">2세트</button></div>
     <button class="btn" id="bDemo">📱 학생 화면 열기(테스트)</button>
     <span class="hint">스페이스바 · → · 리모컨으로도 진행</span>
     <button class="btn primary" id="bMain">▶</button>
